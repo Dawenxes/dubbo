@@ -63,6 +63,7 @@ public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean,
         SpringExtensionFactory.addApplicationContext(applicationContext);
     }
 
+    //factorybean
     @Override
     public Object getObject() {
         return get();

@@ -850,13 +850,16 @@ public class DubboBootstrap extends GenericEventListener {
     /* serve for builder apis, end */
 
     private DynamicConfiguration prepareEnvironment(ConfigCenterConfig configCenter) {
+        //这里从注册中心拿数据
         if (configCenter.isValid()) {
             if (!configCenter.checkOrUpdateInited()) {
                 return null;
             }
+            //拿到url，配置好的，拿到的是ZookeeperDynamicConfiguration
             DynamicConfiguration dynamicConfiguration = getDynamicConfiguration(configCenter.toUrl());
             String configContent = dynamicConfiguration.getProperties(configCenter.getConfigFile(), configCenter.getGroup());
 
+            //这个是服务名称
             String appGroup = getApplication().getName();
             String appConfigContent = null;
             if (isNotEmpty(appGroup)) {
@@ -866,6 +869,7 @@ public class DubboBootstrap extends GenericEventListener {
                         );
             }
             try {
+                //
                 environment.setConfigCenterFirst(configCenter.isHighestPriority());
                 environment.updateExternalConfigurationMap(parseProperties(configContent));
                 environment.updateAppExternalConfigurationMap(parseProperties(appConfigContent));

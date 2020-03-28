@@ -123,15 +123,19 @@ public class Environment extends LifecycleAdapter implements FrameworkExt {
 //        }
 //        prefixedConfiguration = prefixedConfigurations.get(config);
         CompositeConfiguration prefixedConfiguration = new CompositeConfiguration(config.getPrefix(), config.getId());
+        //这里封装bean里面的配置，或者注解的配置
         Configuration configuration = new ConfigConfigurationAdapter(config);
         if (this.isConfigCenterFirst()) {
             // The sequence would be: SystemConfiguration -> AppExternalConfiguration -> ExternalConfiguration -> AbstractConfig -> PropertiesConfiguration
             // Config center has the highest priority
+            //系统属性
             prefixedConfiguration.addConfiguration(systemConfiguration);
             prefixedConfiguration.addConfiguration(environmentConfiguration);
+            //配置中心的，全局和app配置
             prefixedConfiguration.addConfiguration(appExternalConfiguration);
             prefixedConfiguration.addConfiguration(externalConfiguration);
             prefixedConfiguration.addConfiguration(configuration);
+            //dubbo.property文件的
             prefixedConfiguration.addConfiguration(propertiesConfiguration);
         } else {
             // The sequence would be: SystemConfiguration -> AbstractConfig -> AppExternalConfiguration -> ExternalConfiguration -> PropertiesConfiguration

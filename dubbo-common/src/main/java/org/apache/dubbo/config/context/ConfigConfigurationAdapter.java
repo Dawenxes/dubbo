@@ -31,6 +31,7 @@ public class ConfigConfigurationAdapter implements Configuration {
     private Map<String, String> metaData;
 
     public ConfigConfigurationAdapter(AbstractConfig config) {
+        //
         Map<String, String> configMetadata = config.getMetaData();
         metaData = new HashMap<>(configMetadata.size());
         for (Map.Entry<String, String> entry : configMetadata.entrySet()) {

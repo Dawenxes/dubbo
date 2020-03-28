@@ -407,6 +407,7 @@ public abstract class AbstractConfig implements Serializable {
                 String name = method.getName();
                 if (MethodUtils.isMetaMethod(method)) {
                     String key;
+                    //如果有Parame注解，就用value做key，否则用get方法后的名称做key
                     Parameter parameter = method.getAnnotation(Parameter.class);
                     if (parameter != null && parameter.key().length() > 0 && parameter.useKeyAsProperty()) {
                         key = parameter.key();
@@ -457,15 +458,19 @@ public abstract class AbstractConfig implements Serializable {
     public void refresh() {
         Environment env = ApplicationModel.getEnvironment();
         try {
+            //从这里拿
             CompositeConfiguration compositeConfiguration = env.getPrefixedConfiguration(this);
             // loop methods, get override value and set the new value back to method
             Method[] methods = getClass().getMethods();
+            //设置属性，
             for (Method method : methods) {
                 if (MethodUtils.isSetter(method)) {
                     try {
+                        //这里体现了优先级，作用就是取key的值
                         String value = StringUtils.trim(compositeConfiguration.getString(extractPropertyName(getClass(), method)));
                         // isTypeMatch() is called to avoid duplicate and incorrect update, for example, we have two 'setGeneric' methods in ReferenceConfig.
                         if (StringUtils.isNotEmpty(value) && ClassUtils.isTypeMatch(method.getParameterTypes()[0], value)) {
+                            //就是set方法
                             method.invoke(this, ClassUtils.convertPrimitive(method.getParameterTypes()[0], value));
                         }
                     } catch (NoSuchMethodException e) {
