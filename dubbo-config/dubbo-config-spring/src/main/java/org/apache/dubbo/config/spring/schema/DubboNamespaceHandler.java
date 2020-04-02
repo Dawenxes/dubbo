@@ -86,6 +86,7 @@ public class DubboNamespaceHandler extends NamespaceHandlerSupport implements Co
     public BeanDefinition parse(Element element, ParserContext parserContext) {
         BeanDefinitionRegistry registry = parserContext.getRegistry();
         registerAnnotationConfigProcessors(registry);
+        //监听器在这里注册的，假如是xml启动的化
         registerApplicationListeners(registry);
         BeanDefinition beanDefinition = super.parse(element, parserContext);
         setSource(beanDefinition);

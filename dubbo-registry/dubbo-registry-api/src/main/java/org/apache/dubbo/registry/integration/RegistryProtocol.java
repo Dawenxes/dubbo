@@ -439,6 +439,7 @@ public class RegistryProtocol implements Protocol {
         }
         //设置创建路由链
         directory.buildRouterChain(subscribeUrl);
+        //订阅哪些目录，很复杂
         directory.subscribe(toSubscribeUrl(subscribeUrl));
 
         Invoker<T> invoker = cluster.join(directory);

@@ -10,7 +10,7 @@
     <!--<dubbo:protocol id="http" name="http" server="tomcat" port="8081"/>-->
     <!--<dubbo:protocol name="http" server="servlet"/>-->
 
-    <dubbo:config-center address="zookeeper://112.124.98.96:2181" timeout="6000"/>
+    <dubbo:config-center address="zookeeper://127.0.0.1:2181" timeout="6000"/>
     <!--<dubbo:registry address="redis://127.0.0.1:6379" />-->
 
     <!--不允许进行服务注册，通常在开发阶段和直连提供者一起使用-->
@@ -20,7 +20,7 @@
     <!--<dubbo:registry id="qdRegistry" address="10.20.141.150:9090" subscribe="false" />-->
 
     <!--静态服务，非动态服务，服务提供者初次注册时为禁用状态，需人工启用。断线时，将不会被自动删除，需人工禁用。-->
-    <dubbo:registry address="zookeeper://112.124.98.96:2181" timeout="6000"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181" timeout="6000"/>
 
     <!--<dubbo:config-center address="zookeeper://127.0.0.1:2181"/>-->
 

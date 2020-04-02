@@ -228,6 +228,7 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> {
         if (!isOnlyInJvm()) {
             checkRegistry();
         }
+
         this.refresh();
 
         if (StringUtils.isEmpty(interfaceName)) {
@@ -298,6 +299,7 @@ public class ServiceConfig<T> extends ServiceConfigBase<T> {
         if (StringUtils.isEmpty(path)) {
             path = interfaceName;
         }
+        //针对每个协议导出一个服务,还有每个注册中心
         doExportUrls();
     }
 

@@ -73,6 +73,8 @@ public class CompositeConfiguration implements Configuration {
         this.configList.add(pos, configuration);
     }
 
+
+    //这里显示了配置的优先级策略
     @Override
     public Object getInternalProperty(String key) {
         Configuration firstMatchingConfiguration = null;

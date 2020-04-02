@@ -47,6 +47,7 @@ public class RouterChain<T> {
     }
 
     private RouterChain(URL url) {
+        //拿到一群实现类
         List<RouterFactory> extensionFactories = ExtensionLoader.getExtensionLoader(RouterFactory.class)
                 .getActivateExtension(url, "router");
 
